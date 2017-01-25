@@ -4,6 +4,7 @@
     <BluehandsVersioningAssembly>$(MSBuildThisFileDirectory)\..\tools\Bluehands.Versioning.dll</BluehandsVersioningAssembly>
   </PropertyGroup>
   <UsingTask AssemblyFile="$(BluehandsVersioningAssembly)" TaskName="ReadVersionFile"/>
+  <UsingTask AssemblyFile="$(BluehandsVersioningAssembly)" TaskName="RemoveLines"/>
   <Target Name="BeforeBuild">
     <ReadVersionFile Folders="$(ProjectDir)Properties;$(ProjectDir);$(SolutionDir)" Filenames="AssemblyVersionInfoTemplate.txt;Version.txt" SegmentCount="3">
       <Output TaskParameter="VersionPrefix" PropertyName="VersionPrefix" />
@@ -26,5 +27,6 @@
     </PropertyGroup>
     <Message Text="Version: $(FullVersion)-$(BuildInfo)" />
     <AssemblyInfo CodeLanguage="CS" OutputFile="$(ProjectDir)Properties\AssemblyVersionInfo.cs" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo)" />
+    <RemoveLines Files="$(ProjectDir)Properties\AssemblyInfo.cs" Patterns="^[^\/].*[\s.:](AssemblyVersion|AssemblyFileVersion|AssemblyInformationalVersion)([\s(]|Attribute[\s(])" />
   </Target>
 </Project>
