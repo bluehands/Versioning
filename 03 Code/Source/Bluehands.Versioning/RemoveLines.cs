@@ -15,30 +15,47 @@ namespace Bluehands.Versioning
         [Required]
         public string[] Patterns { get; set; }
 
+        public bool FailOnError { get; set; } = true;
+
+        public string ErrorMessage { get; set; } = $"The \"{nameof(RemoveLines)}\" task failed unexpectedly.";
+
         public override bool Execute()
         {
-            var patterns = Patterns.Select(pattern => new Regex(pattern)).ToArray();
-            foreach (var file in Files)
+            try
             {
-                var lines = File.ReadAllLines(file);
-                var remaining = lines.Where(line =>
+                var patterns = Patterns.Select(pattern => new Regex(pattern)).ToArray();
+                foreach (var file in Files)
                 {
-                    foreach (var pattern in patterns)
+                    var lines = File.ReadAllLines(file);
+                    var remaining = lines.Where(line =>
                     {
-                        if (pattern.IsMatch(line))
+                        foreach (var pattern in patterns)
                         {
-                            Log.LogMessage($"Found line in file \"{file}\" that matched the pattern \"{pattern}\":{Environment.NewLine}{line}");
-                            return false;
+                            if (pattern.IsMatch(line))
+                            {
+                                Log.LogMessage($"Found line in file \"{file}\" that matched the pattern \"{pattern}\":{Environment.NewLine}{line}");
+                                return false;
+                            }
                         }
+                        return true;
+                    }).ToArray();
+                    var removedCount = lines.Length - remaining.Length;
+                    if (removedCount > 0)
+                    {
+                        File.WriteAllLines(file, remaining);
+                        Log.LogMessage($"Removed {removedCount} lines from file \"{file}\".");
                     }
-                    return true;
-                }).ToArray();
-                var removedCount = lines.Length - remaining.Length;
-                if (removedCount > 0)
-                {
-                    File.WriteAllLines(file, remaining);
-                    Log.LogMessage($"Removed {removedCount} lines from file \"{file}\".");
                 }
+            }
+            catch (Exception ex)
+            {
+                var message = $"{ErrorMessage} More information:{Environment.NewLine}Files:{Environment.NewLine}{string.Join(Environment.NewLine, Files)}{Environment.NewLine}Patterns:{Environment.NewLine}{string.Join(Environment.NewLine, Patterns)}{Environment.NewLine}Exception:{Environment.NewLine}{ex}";
+                if (FailOnError)
+                {
+                    Log.LogError(message);
+                    return false;
+                }
+                Log.LogWarning(message);
             }
             return true;
         }

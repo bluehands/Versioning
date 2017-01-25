@@ -36,6 +36,6 @@
     </PropertyGroup>
     <Message Text="Version: $(FullVersion)-$(BuildInfo)" />
     <AssemblyInfo CodeLanguage="CS" OutputFile="$(AssemblyVersionInfoFile)" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo)" />
-    <RemoveLines Files="$(AssemblyInfoFile)" Patterns="$(AssemblyVersionAttributePatterns)" />
+    <RemoveLines Files="$(AssemblyInfoFile)" Patterns="$(AssemblyVersionAttributePatterns)" FailOnError="False" ErrorMessage="Error while removing duplicate assembly version attributes. This warning can be safely ignored if there are no &quot;duplicate attribute&quot; errors." />
   </Target>
 </Project>
