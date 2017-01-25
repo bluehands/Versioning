@@ -5,8 +5,17 @@
   </PropertyGroup>
   <UsingTask AssemblyFile="$(BluehandsVersioningAssembly)" TaskName="ReadVersionFile"/>
   <UsingTask AssemblyFile="$(BluehandsVersioningAssembly)" TaskName="RemoveLines"/>
+
+  <PropertyGroup>
+    <VersionTemplateFilenames Condition=" '$(VersionTemplateFilenames)' == '' ">AssemblyVersionInfoTemplate.txt;Version.txt</VersionTemplateFilenames>
+    <VersionTemplateFolders Condition=" '$(VersionTemplateFolders)' == '' ">$(ProjectDir)Properties;$(ProjectDir);$(SolutionDir)</VersionTemplateFolders>
+    <VersionTemplateSegmentCount Condition=" '$(VersionTemplateSegmentCount)' == '' ">3</VersionTemplateSegmentCount>
+    <AssemblyVersionInfoFile Condition=" '$(AssemblyVersionInfoFile)' == '' ">$(ProjectDir)Properties\AssemblyVersionInfo.cs</AssemblyVersionInfoFile>
+    <AssemblyInfoFile Condition=" '$(AssemblyInfoFile)' == '' ">$(ProjectDir)Properties\AssemblyInfo.cs</AssemblyInfoFile>
+    <AssemblyVersionAttributePatterns Condition=" '$(AssemblyVersionAttributePatterns)' == '' ">^[^\/].*[\s.:](AssemblyVersion|AssemblyFileVersion|AssemblyInformationalVersion)([\s(]|Attribute[\s(])</AssemblyVersionAttributePatterns>
+  </PropertyGroup>
   <Target Name="BeforeBuild">
-    <ReadVersionFile Folders="$(ProjectDir)Properties;$(ProjectDir);$(SolutionDir)" Filenames="AssemblyVersionInfoTemplate.txt;Version.txt" SegmentCount="3">
+    <ReadVersionFile Folders="$(VersionTemplateFolders)" Filenames="$(VersionTemplateFilenames)" SegmentCount="$(VersionTemplateSegmentCount)">
       <Output TaskParameter="VersionPrefix" PropertyName="VersionPrefix" />
     </ReadVersionFile>
     <GitCommits LocalPath="$(ProjectDir)">
@@ -26,7 +35,7 @@
       <BuildInfo>$(GitBranchName)-$(GitCommitHash)-$(BuildDate)</BuildInfo>
     </PropertyGroup>
     <Message Text="Version: $(FullVersion)-$(BuildInfo)" />
-    <AssemblyInfo CodeLanguage="CS" OutputFile="$(ProjectDir)Properties\AssemblyVersionInfo.cs" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo)" />
-    <RemoveLines Files="$(ProjectDir)Properties\AssemblyInfo.cs" Patterns="^[^\/].*[\s.:](AssemblyVersion|AssemblyFileVersion|AssemblyInformationalVersion)([\s(]|Attribute[\s(])" />
+    <AssemblyInfo CodeLanguage="CS" OutputFile="$(AssemblyVersionInfoFile)" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo)" />
+    <RemoveLines Files="$(AssemblyInfoFile)" Patterns="$(AssemblyVersionAttributePatterns)" />
   </Target>
 </Project>
