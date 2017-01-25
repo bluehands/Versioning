@@ -45,12 +45,23 @@
     <Compile Include="ReadVersionFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="nuget\tools\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="nuget\Bluehands.Versioning.nuspec" />
+    <None Include="nuget\build\Bluehands.Versioning.targets" />
+    <None Include="nuget\content\Properties\.gitignore" />
+    <None Include="nuget\content\Properties\AssemblyVersionInfo.cs" />
+    <None Include="nuget\content\Properties\Version.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="bin\$(Configuration)\Bluehands.Versioning.dll" DestinationFolder="nuget\tools" />
+  </Target>
 </Project>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <BluehandsVersioningAssembly>$(MSBuildThisFileDirectory)\..\tools\Bluehands.Versioning.dll</BluehandsVersioningAssembly>
+  </PropertyGroup>
+  <UsingTask AssemblyFile="$(BluehandsVersioningAssembly)" TaskName="ReadVersionFile"/>
+  <Target Name="BeforeBuild">
+    <ReadVersionFile Folders="$(ProjectDir)Properties;$(ProjectDir);$(SolutionDir)" Filenames="AssemblyVersionInfoTemplate.txt;Version.txt" SegmentCount="3">
+      <Output TaskParameter="VersionPrefix" PropertyName="VersionPrefix" />
+    </ReadVersionFile>
+    <GitCommits LocalPath="$(ProjectDir)">
+      <Output TaskParameter="CommitsCount" PropertyName="GitCommitsCount" />
+    </GitCommits>
+    <GitBranch LocalPath="$(ProjectDir)">
+      <Output TaskParameter="Branch" PropertyName="GitBranchName" />
+    </GitBranch>
+    <GitVersion LocalPath="$(ProjectDir)" Short="false">
+      <Output TaskParameter="CommitHash" PropertyName="GitCommitHash" />
+    </GitVersion>
+    <Time Format="yyyyMMddHHmmss">
+      <Output TaskParameter="FormattedTime" PropertyName="BuildDate" />
+    </Time>
+    <PropertyGroup>
+      <FullVersion>$(VersionPrefix).$(GitCommitsCount)</FullVersion>
+      <BuildInfo>$(GitBranchName)-$(GitCommitHash)-$(BuildDate)</BuildInfo>
+    </PropertyGroup>
+    <Message Text="Version: $(FullVersion)-$(BuildInfo)" />
+    <AssemblyInfo CodeLanguage="CS" OutputFile="$(ProjectDir)Properties\AssemblyVersionInfo.cs" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo)" />
+  </Target>
+</Project>
