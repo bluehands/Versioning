@@ -17,7 +17,7 @@
     <GitVersion LocalPath="$(ProjectDir)" Short="false">
       <Output TaskParameter="CommitHash" PropertyName="GitCommitHash" />
     </GitVersion>
-    <Time Format="yyyyMMddHHmmss">
+    <Time Format="yyyyMMdd-HHmmss">
       <Output TaskParameter="FormattedTime" PropertyName="BuildDate" />
     </Time>
     <PropertyGroup>
