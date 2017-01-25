@@ -31,7 +31,7 @@ namespace Bluehands.Versioning
             var path = FindVersionFile();
             if (path == null)
             {
-                Log.LogError($"No version file could be found. Create a file named \"{string.Join("\" or \"", Filenames)}\" in one of the following directories: {Environment.NewLine}{string.Join(Environment.NewLine, Folders)})");
+                Log.LogError($"No version file could be found. Create a file named \"{string.Join("\" or \"", Filenames)}\" in one of the following directories: {Environment.NewLine}{string.Join(Environment.NewLine, Folders)}");
                 return false;
             }
 
