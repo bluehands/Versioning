@@ -54,7 +54,7 @@
     <None Include="nuget\build\Bluehands.Versioning.targets" />
     <None Include="nuget\content\Properties\.gitignore" />
     <None Include="nuget\content\Properties\AssemblyVersionInfo.cs" />
-    <None Include="nuget\content\Properties\Version.txt" />
+    <None Include="nuget\content\Version.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

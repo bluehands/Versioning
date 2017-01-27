@@ -1,0 +1,17 @@
+﻿1.0.0
+
+# Todo
+
+- Specify up to three version number segments (MAJOR.MINOR.PATCH) in the first line of this file. It is recommended to use semantic versioning: http://semver.org/
+
+- If you want the same version number for all projects in the solution, move this file to the folder of the solution file (.sln).
+
+# About
+
+- The fourth version number segment is automatically set to the Git commit count, e.g. if the version number in this file is 1.0.0 and you have made 2 commits, the generated version number will be 1.0.0.2.
+
+- The generated version number will be used to set the AssemblyVersion and AssemblyFileVersion attributes.
+
+- The AssemblyInformationalVersion attribute will be set to a string that includes the Git branch name, commit hash and build date.
+
+- The generated attributes are set in Properties\AssemblyVersionInfo.cs, which is added to .gitignore by default.
