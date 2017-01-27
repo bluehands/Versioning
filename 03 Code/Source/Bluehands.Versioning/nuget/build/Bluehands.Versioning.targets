@@ -7,8 +7,8 @@
   <UsingTask AssemblyFile="$(BluehandsVersioningAssembly)" TaskName="RemoveLines"/>
 
   <PropertyGroup>
-    <VersionTemplateFilenames Condition=" '$(VersionTemplateFilenames)' == '' ">AssemblyVersionInfoTemplate.txt;Version.txt</VersionTemplateFilenames>
-    <VersionTemplateFolders Condition=" '$(VersionTemplateFolders)' == '' ">$(ProjectDir)Properties;$(ProjectDir);$(SolutionDir)</VersionTemplateFolders>
+    <VersionTemplateFilenames Condition=" '$(VersionTemplateFilenames)' == '' ">Version.txt</VersionTemplateFilenames>
+    <VersionTemplateFolders Condition=" '$(VersionTemplateFolders)' == '' ">$(ProjectDir);$(SolutionDir)</VersionTemplateFolders>
     <VersionTemplateSegmentCount Condition=" '$(VersionTemplateSegmentCount)' == '' ">3</VersionTemplateSegmentCount>
     <AssemblyVersionInfoFile Condition=" '$(AssemblyVersionInfoFile)' == '' ">$(ProjectDir)Properties\AssemblyVersionInfo.cs</AssemblyVersionInfoFile>
     <AssemblyInfoFile Condition=" '$(AssemblyInfoFile)' == '' ">$(ProjectDir)Properties\AssemblyInfo.cs</AssemblyInfoFile>
