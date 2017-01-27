@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Bluehands.Versioning</id>
+    <id>bluehands.Versioning</id>
     <version>1.0.0</version>
     <authors>Liwen Guo</authors>
-    <owners>Liwen Guo</owners>
+    <owners>bluehands GmbH &amp; Co.mmunication KG</owners>
     <projectUrl>https://github.com/bluehands/development-guidelines</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Sets up automatic assembly versioning. Open Version.txt in the project root after the package is installed for more information.
@@ -12,7 +12,7 @@
 Note: Does not work with projects that use project.json.</description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2017</copyright>
-    <tags>Bluehands Version Versioning</tags>
+    <tags>bluehands version versioning</tags>
     <dependencies>
       <dependency id="MSBuildTasks" version="1.5.0.235" />
     </dependencies>
