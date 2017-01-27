@@ -4,7 +4,7 @@
 
 - Specify up to three version number segments (MAJOR.MINOR.PATCH) in the first line of this file. It is recommended to use semantic versioning: http://semver.org/
 
-- If you want the same version number for all projects in the solution, move this file to the folder of the solution file (.sln).
+- If you want the same version number for all projects in the solution, move this file to the folder of the solution file (.sln). If a Version.txt already exists there, delete this file.
 
 # About
 
