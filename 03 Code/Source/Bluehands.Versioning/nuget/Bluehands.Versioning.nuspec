@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>bluehands.Versioning</id>
+    <id>Bluehands.Versioning</id>
     <version>1.0.0</version>
     <authors>Liwen Guo</authors>
     <owners>bluehands GmbH &amp; Co.mmunication KG</owners>
