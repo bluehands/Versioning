@@ -1,1 +1,4 @@
-﻿AssemblyVersionInfo.cs
+﻿# Visual Studio ignores the first line in .gitignore files in subfolders
+
+# Auto-generated version info
+AssemblyVersionInfo.cs
