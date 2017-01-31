@@ -7,7 +7,7 @@
     <owners>bluehands GmbH &amp; Co.mmunication KG</owners>
     <projectUrl>https://github.com/bluehands/development-guidelines</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Sets up automatic assembly versioning. Open Version.txt in the project root after the package is installed for more information.
+    <description>Sets up automatic assembly versioning. See Version.README.txt in the project root after the package is installed for more information.
 
 Note: Does not work with projects that use project.json.</description>
     <releaseNotes></releaseNotes>
