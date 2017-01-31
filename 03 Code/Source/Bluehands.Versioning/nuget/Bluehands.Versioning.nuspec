@@ -5,7 +5,7 @@
     <version>1.0.0</version>
     <authors>Liwen Guo</authors>
     <owners>bluehands GmbH &amp; Co.mmunication KG</owners>
-    <projectUrl>https://github.com/bluehands/development-guidelines</projectUrl>
+    <projectUrl>https://github.com/bluehands/development-guidelines#versionierung</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Sets up automatic assembly versioning. See Version.README.txt in the project root after the package is installed for more information.
 
