@@ -8,11 +8,11 @@
     <projectUrl>https://github.com/bluehands/development-guidelines#versionierung</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-      Sets up automatic assembly versioning. See Version.README.txt in the project root after the package is installed for more information.
+Sets up automatic assembly versioning. See Version.README.txt in the project root after the package is installed for more information.
 
-      Invoke MSBuild with "/p:UseGeneratedVersionForClickOnce=True" to use the generated version as the ClickOnce version as well.
+Invoke MSBuild with "/p:UseGeneratedVersionForClickOnce=True" to use the generated version as the ClickOnce version as well.
 
-      Note: Does not work with projects that use project.json.
+Note: Does not work with projects that use project.json.
     </description>
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2017</copyright>
