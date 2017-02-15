@@ -10,7 +10,7 @@
     <description>
 Sets up automatic assembly versioning. See Version.README.txt in the project root after the package is installed for more information.
 
-Invoke MSBuild with "/p:UseGeneratedVersionForClickOnce=True" to use the generated version as the ClickOnce version as well.
+To use the generated version as the ClickOnce version, invoke MSBuild on the command-line with "/p:UseGeneratedVersionForClickOnce=True".
 
 Note: Does not work with projects that use project.json.
     </description>
