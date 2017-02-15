@@ -50,8 +50,6 @@
     <Folder Include="nuget\tools\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="nuget.ClickOnce\Bluehands.Versioning.ClickOnce.nuspec" />
-    <None Include="nuget.ClickOnce\build\Bluehands.Versioning.ClickOnce.targets" />
     <None Include="nuget\Bluehands.Versioning.nuspec" />
     <None Include="nuget\build\Bluehands.Versioning.targets" />
     <None Include="nuget\content\Properties\.gitignore" />

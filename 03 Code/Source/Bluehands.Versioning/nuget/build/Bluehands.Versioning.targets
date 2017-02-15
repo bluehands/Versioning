@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- import build tasks -->
   <PropertyGroup>
     <BluehandsVersioningAssembly>$(MSBuildThisFileDirectory)\..\tools\Bluehands.Versioning.dll</BluehandsVersioningAssembly>
   </PropertyGroup>
   <UsingTask AssemblyFile="$(BluehandsVersioningAssembly)" TaskName="ReadVersionFile"/>
   <UsingTask AssemblyFile="$(BluehandsVersioningAssembly)" TaskName="RemoveLines"/>
 
+  <!-- default property values -->
   <PropertyGroup>
     <VersionTemplateFilenames Condition=" '$(VersionTemplateFilenames)' == '' ">Version.txt</VersionTemplateFilenames>
     <VersionTemplateFolders Condition=" '$(VersionTemplateFolders)' == '' ">$(ProjectDir);$(SolutionDir)</VersionTemplateFolders>
@@ -14,7 +17,10 @@
     <AssemblyInfoFile Condition=" '$(AssemblyInfoFile)' == '' ">$(ProjectDir)Properties\AssemblyInfo.cs</AssemblyInfoFile>
     <AssemblyVersionAttributePatterns Condition=" '$(AssemblyVersionAttributePatterns)' == '' ">^[^\/].*[\s.:](AssemblyVersion|AssemblyFileVersion|AssemblyInformationalVersion)([\s(]|Attribute[\s(])</AssemblyVersionAttributePatterns>
   </PropertyGroup>
+
   <Target Name="BeforeBuild">
+
+    <!-- generate version -->
     <ReadVersionFile Folders="$(VersionTemplateFolders)" Filenames="$(VersionTemplateFilenames)" SegmentCount="$(VersionTemplateSegmentCount)">
       <Output TaskParameter="VersionPrefix" PropertyName="VersionPrefix" />
     </ReadVersionFile>
@@ -34,8 +40,21 @@
       <FullVersion>$(VersionPrefix).$(GitCommitsCount)</FullVersion>
       <BuildInfo>$(GitBranchName)-$(GitCommitHash)-$(BuildDate)</BuildInfo>
     </PropertyGroup>
-    <Message Text="Version: $(FullVersion)-$(BuildInfo)" />
+    <Message Text="Generated assembly version: $(FullVersion)"/>
+    <Message Text="Additional version info: $(BuildInfo)"/>
+
+    <!-- apply generated version to assembly -->
     <AssemblyInfo CodeLanguage="CS" OutputFile="$(AssemblyVersionInfoFile)" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo)" />
     <RemoveLines Files="$(AssemblyInfoFile)" Patterns="$(AssemblyVersionAttributePatterns)" FailOnError="False" ErrorMessage="Error while removing duplicate assembly version attributes. This warning can be safely ignored if there are no &quot;duplicate attribute&quot; errors." />
+
+    <!-- apply generated version to ClickOnce (if UseGeneratedVersionForClickOnce is True) -->
+    <PropertyGroup Condition="'$(UseGeneratedVersionForClickOnce)' == 'True'">
+      <!-- for normal applications -->
+      <ApplicationVersion>$(FullVersion)</ApplicationVersion>
+      <!-- for Office VSTO addins -->
+      <PublishVersion>$(FullVersion)</PublishVersion>
+    </PropertyGroup>
+    <Message Condition="'$(UseGeneratedVersionForClickOnce)' == 'True'" Text="Also setting ClickOnce version: $(FullVersion)" />
+
   </Target>
 </Project>
