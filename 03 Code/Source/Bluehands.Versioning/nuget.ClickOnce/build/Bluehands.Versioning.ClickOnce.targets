@@ -5,7 +5,11 @@
       <Output TaskParameter="Assemblies" ItemName="TargetAssemblyIdentity" />
     </GetAssemblyIdentity>
     <PropertyGroup>
-      <PublishVersion>%(TargetAssemblyIdentity.Version)</PublishVersion>
+      <AssemblyVersion>%(TargetAssemblyIdentity.Version)</AssemblyVersion>
+      <!-- for normal applications -->
+      <ApplicationVersion>$(AssemblyVersion)</ApplicationVersion>
+      <!-- for Office VSTO addins -->
+      <PublishVersion>$(AssemblyVersion)</PublishVersion>
     </PropertyGroup>
   </Target>
 </Project>
