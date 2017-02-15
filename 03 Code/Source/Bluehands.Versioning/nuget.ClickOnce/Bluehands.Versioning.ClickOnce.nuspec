@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Bluehands.Versioning.ClickOnce</id>
+    <version>1.0.0</version>
+    <authors>Liwen Guo</authors>
+    <owners>bluehands GmbH &amp; Co.mmunication KG</owners>
+    <projectUrl>https://github.com/bluehands/development-guidelines#versionierung</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Sets the ClickOnce version to the assembly version if MSBuild is invoked with /p:UseAssemblyVersionForClickOnce=True.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>bluehands version versioning clickonce</tags>
+  </metadata>
+</package>
