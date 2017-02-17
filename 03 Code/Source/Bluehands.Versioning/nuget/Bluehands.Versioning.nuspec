@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Bluehands.Versioning</id>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <authors>Liwen Guo</authors>
     <owners>bluehands GmbH &amp; Co.mmunication KG</owners>
     <projectUrl>https://github.com/bluehands/development-guidelines#versionierung</projectUrl>
@@ -17,6 +17,7 @@ Note: Does not work with projects that use project.json.
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2017</copyright>
     <tags>bluehands version versioning</tags>
+    <developmentDependency>true</developmentDependency>
     <dependencies>
       <dependency id="MSBuildTasks" version="1.5.0.235" />
     </dependencies>
