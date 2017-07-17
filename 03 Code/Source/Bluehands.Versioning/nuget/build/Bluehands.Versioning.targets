@@ -19,7 +19,7 @@
     <AssemblyVersionAttributePatterns Condition=" '$(AssemblyVersionAttributePatterns)' == '' ">^[^\/].*[\s.:](AssemblyVersion|AssemblyFileVersion|AssemblyInformationalVersion)([\s(]|Attribute[\s(])</AssemblyVersionAttributePatterns>
   </PropertyGroup>
 
-  <Target Name="BeforeBuild">
+  <Target Name="BluehandsVersioning" BeforeTargets="BeforeBuild">
 
     <!-- generate version -->
     <ReadVersionFile Folders="$(VersionTemplateFolders)" Filenames="$(VersionTemplateFilenames)" SegmentCount="$(VersionTemplateSegmentCount)">
