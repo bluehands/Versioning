@@ -40,12 +40,14 @@
     <PropertyGroup>
       <FullVersion>$(VersionPrefix).$(GitCommitsCount)</FullVersion>
       <BuildInfo>$(GitBranchName)-$(GitCommitHash)-$(BuildDate)</BuildInfo>
+      <!-- escape forward slashes (usually from branch names) to avoid additional subfolder in System.Windows.Forms.Application.UserAppDataPath -->
+      <BuildInfo>$(BuildInfo.Replace('/', '$(AssemblyInformationalVersionEscapeCharacter)'))</BuildInfo>
     </PropertyGroup>
     <Message Text="Generated assembly version: $(FullVersion)"/>
     <Message Text="Additional version info: $(BuildInfo)"/>
 
     <!-- apply generated version to assembly -->
-    <AssemblyInfo CodeLanguage="CS" OutputFile="$(AssemblyVersionInfoFile)" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo.Replace('/', '$(AssemblyInformationalVersionEscapeCharacter)'))" /><!-- escape forward slashes (usually from branch names) to avoid additional subfolder in System.Windows.Forms.Application.UserAppDataPath -->
+    <AssemblyInfo CodeLanguage="CS" OutputFile="$(AssemblyVersionInfoFile)" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo)" />
     <RemoveLines Files="$(AssemblyInfoFile)" Patterns="$(AssemblyVersionAttributePatterns)" FailOnError="False" ErrorMessage="Error while removing duplicate assembly version attributes. This warning can be safely ignored if there are no &quot;duplicate attribute&quot; errors." />
 
     <!-- apply generated version to ClickOnce (if UseGeneratedVersionForClickOnce is True) -->
