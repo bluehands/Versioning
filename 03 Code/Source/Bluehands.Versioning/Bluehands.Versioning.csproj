@@ -1,7 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <NuspecFile>nuget\Bluehands.Versioning.nuspec</NuspecFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="15.3.409" />
+  </ItemGroup>
+
+  <Target Name="CopyVersioningDll" AfterTargets="AfterBuild">
+    <Copy SourceFiles="$(OutputPath)Bluehands.Versioning.dll" DestinationFolder="nuget\tools" />
+  </Target>
 
 </Project>
