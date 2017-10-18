@@ -19,9 +19,8 @@
     <AssemblyVersionAttributePatterns Condition=" '$(AssemblyVersionAttributePatterns)' == '' ">^[^\/].*[\s.:](AssemblyVersion|AssemblyFileVersion|AssemblyInformationalVersion)([\s(]|Attribute[\s(])</AssemblyVersionAttributePatterns>
   </PropertyGroup>
 
+  <!-- generate version -->
   <Target Name="BluehandsVersioning" BeforeTargets="BeforeBuild">
-
-    <!-- generate version -->
     <ReadVersionFile Folders="$(VersionTemplateFolders)" Filenames="$(VersionTemplateFilenames)" SegmentCount="$(VersionTemplateSegmentCount)">
       <Output TaskParameter="VersionPrefix" PropertyName="VersionPrefix" />
     </ReadVersionFile>
@@ -45,12 +44,27 @@
     </PropertyGroup>
     <Message Text="Generated assembly version: $(FullVersion)"/>
     <Message Text="Additional version info: $(BuildInfo)"/>
+  </Target>
 
-    <!-- apply generated version to assembly -->
+  <!-- apply generated version to projects using the new MSBuild format (with default GenerateAssemblyInfo=true) -->
+  <Target Name="BluehandsVersioningBuildProperties" AfterTargets="BluehandsVersioning">
+    <Message Text="Applying generated version information to build properties (for projects using the new MSBuild format)"/>
+    <PropertyGroup>
+      <AssemblyVersion>$(FullVersion)</AssemblyVersion>
+      <FileVersion>$(FullVersion)</FileVersion>
+      <InformationalVersion>$(BuildInfo)</InformationalVersion>
+    </PropertyGroup>
+  </Target>
+
+  <!-- apply generated version to all other projects (old MSBuild or opt-out with GenerateAssemblyInfo=false) -->
+  <Target Name="BluehandsVersioningAssemblyInfo" Condition="'$(GenerateAssemblyInfo)' != 'true'" AfterTargets="BluehandsVersioning">
+    <Message Text="Applying generated version information to assembly info file"/>
     <AssemblyInfo CodeLanguage="CS" OutputFile="$(AssemblyVersionInfoFile)" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo)" />
     <RemoveLines Files="$(AssemblyInfoFile)" Patterns="$(AssemblyVersionAttributePatterns)" FailOnError="False" ErrorMessage="Error while removing duplicate assembly version attributes. This warning can be safely ignored if there are no &quot;duplicate attribute&quot; errors." />
+  </Target>
 
-    <!-- apply generated version to ClickOnce (if UseGeneratedVersionForClickOnce is True) -->
+  <!-- apply generated version to ClickOnce (if UseGeneratedVersionForClickOnce is True) -->
+  <Target Name="BluehandsVersioningClickOnce" AfterTargets="BluehandsVersioning">
     <PropertyGroup Condition="'$(UseGeneratedVersionForClickOnce)' == 'True'">
       <!-- for normal applications -->
       <ApplicationVersion>$(FullVersion)</ApplicationVersion>
@@ -58,6 +72,6 @@
       <PublishVersion>$(FullVersion)</PublishVersion>
     </PropertyGroup>
     <Message Condition="'$(UseGeneratedVersionForClickOnce)' == 'True'" Text="Also setting ClickOnce version: $(FullVersion)" />
-
   </Target>
+
 </Project>
