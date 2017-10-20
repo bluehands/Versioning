@@ -61,6 +61,9 @@
     <Message Text="Applying generated version information to assembly info file"/>
     <AssemblyInfo CodeLanguage="CS" OutputFile="$(AssemblyVersionInfoFile)" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo)" />
     <RemoveLines Files="$(AssemblyInfoFile)" Patterns="$(AssemblyVersionAttributePatterns)" FailOnError="False" ErrorMessage="Error while removing duplicate assembly version attributes. This warning can be safely ignored if there are no &quot;duplicate attribute&quot; errors." />
+    <ItemGroup>
+      <Compile Include="$(AssemblyVersionInfoFile)" />
+    </ItemGroup>
   </Target>
 
   <!-- apply generated version to ClickOnce (if UseGeneratedVersionForClickOnce is True) -->
