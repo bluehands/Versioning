@@ -2,9 +2,11 @@
 
 Bluehands.Versioning provides automatic assembly versioning for .NET projects.
 
+This package is [available on nuget](https://www.nuget.org/packages/Bluehands.Versioning).
+
 ## What you need to do
 
-After installing the package, create a `Version.txt` file with three version number segments (e.g. `1.0.0`) in the project or solution folder.
+Install the [package from nuget](https://www.nuget.org/packages/Bluehands.Versioning) and create a `Version.txt` file with three version number segments (e.g. `1.0.0`) in the project or solution folder.
 
 Set and update the version number in `Version.txt` as you see fit. Consider using [Semantic Versioning](http://semver.org/).
 
