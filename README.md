@@ -40,3 +40,8 @@ Each build from a CI server will automatically get its own version number even i
   3. Add `AssemblyVersionInfo.cs` to your `.gitignore`.
 
 ## Changelog
+
+### Version 1.2
+
+- Added: support for projects using the new MSBuild format
+- Improved: no more overwrite prompts when upgrading the package
