@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Bluehands.Versioning</id>
-    <version>1.2.0</version>
+    <version>1.3.0</version>
     <authors>Liwen Guo</authors>
     <owners>bluehands GmbH &amp; Co.mmunication KG</owners>
     <projectUrl>https://github.com/bluehands/Versioning</projectUrl>

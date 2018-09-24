@@ -28,20 +28,19 @@ Each build from a CI server will automatically get its own version number even i
   - Add `<UseGeneratedVersionForClickOnce>true</UseGeneratedVersionForClickOnce>` to a `PropertyGroup` in the project file.
   - Call MSBuild on the command line with an additional `/p:UseGeneratedVersionForClickOnce=True` parameter.
 
-- It is recommended to not commit the `AssemblyVersionInfo.cs` file since it is generated automatically. Usually a `.gitignore` file including it should be created automatically.
-
 ## Known issues
 
 - Does not work with the `dotnet` CLI and thus on platforms other than Windows yet.
 
 - Does not and will never work with `project.json`/`.xproj` projects since they do not use MSBuild.
 
-- Projects using the new MSBuild format introduced in Visual Studio 2017, i.e. most newer .NET Core and .NET Standard projects, use a different mechanism for setting the `AssemblyVersion` data. If you opt-out of the default behavior by setting `GenerateAssemblyInfo` to `false`, you'll need to do a few things:
-  1. Create a `Properties` subfolder under the project root.
-  2. If necessary, remove any duplicate attributes in your own `AssemblyInfo.cs` file (as indicated in the build error message).
-  3. Add `AssemblyVersionInfo.cs` to your `.gitignore`.
-
 ## Changelog
+
+### Version 1.3
+
+- Improved: the generated `AssemblyVersionInfo.cs` is now located in the `obj` folder by default to avoid cluttering up the project folder
+- Improved: no `.gitignore` file is automatically created anymore as it is no longer necessary
+- Fixed: editing the `AssemblyVersionInfo.cs` file manually no longer leads to inconsistent values in the binary
 
 ### Version 1.2
 
