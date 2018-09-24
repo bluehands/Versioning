@@ -13,6 +13,7 @@
     <VersionTemplateFilenames Condition=" '$(VersionTemplateFilenames)' == '' ">Version.txt</VersionTemplateFilenames>
     <VersionTemplateFolders Condition=" '$(VersionTemplateFolders)' == '' ">$(ProjectDir);$(SolutionDir)</VersionTemplateFolders>
     <VersionTemplateSegmentCount Condition=" '$(VersionTemplateSegmentCount)' == '' ">3</VersionTemplateSegmentCount>
+    <UsingDefaultAssemblyVersionInfoFile Condition=" '$(AssemblyVersionInfoFile)' == '' ">true</UsingDefaultAssemblyVersionInfoFile>
     <AssemblyVersionInfoFile Condition=" '$(AssemblyVersionInfoFile)' == '' ">$(IntermediateOutputPath)$(AssemblyName).AssemblyVersionInfo.cs</AssemblyVersionInfoFile>
     <AssemblyInformationalVersionEscapeCharacter Condition=" '$(AssemblyInformationalVersionEscapeCharacter)' == '' ">-</AssemblyInformationalVersionEscapeCharacter>
     <AssemblyInfoFile Condition=" '$(AssemblyInfoFile)' == '' ">$(ProjectDir)Properties\AssemblyInfo.cs</AssemblyInfoFile>
@@ -59,7 +60,11 @@
 
   <!-- apply generated version to all other projects (old MSBuild or opt-out with GenerateAssemblyInfo=false) -->
   <Target Name="BluehandsVersioningAssemblyInfo" Condition="'$(GenerateAssemblyInfo)' != 'true'" AfterTargets="BluehandsVersioning">
+    <PropertyGroup>
+      <OldAssemblyVersionInfoFile>$(ProjectDir)Properties\AssemblyVersionInfo.cs</OldAssemblyVersionInfoFile>
+    </PropertyGroup>
     <Message Text="Applying generated version information to assembly info file"/>
+    <Error Condition="'$(UsingDefaultAssemblyVersionInfoFile)' == 'true' And Exists('$(OldAssemblyVersionInfoFile)')" Text="Please delete &quot;$(OldAssemblyVersionInfoFile)&quot; and the .gitignore file in the same folder as they are no longer necessary since Bluehands.Versioning 1.3.0. The generated AssemblyVersionInfo.cs file is now located in the obj folder by default." />
     <AssemblyInfo CodeLanguage="CS" OutputFile="$(AssemblyVersionInfoFile)" AssemblyVersion="$(FullVersion)" AssemblyFileVersion="$(FullVersion)" AssemblyInformationalVersion="$(BuildInfo)" />
     <RemoveLines Files="$(AssemblyInfoFile)" Patterns="$(AssemblyVersionAttributePatterns)" FailOnError="False" ErrorMessage="Error while removing duplicate assembly version attributes. This warning can be safely ignored if there are no &quot;duplicate attribute&quot; errors." />
     <ItemGroup>
