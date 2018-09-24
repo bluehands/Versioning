@@ -47,7 +47,8 @@
   </Target>
 
   <!-- apply generated version to projects using the new MSBuild format (with default GenerateAssemblyInfo=true) -->
-  <Target Name="BluehandsVersioningBuildProperties" AfterTargets="BluehandsVersioning">
+  <!-- the explicit GenerateAssemblyInfo check is necessary to avoid inconsistencies if the properties and $(AssemblyVersionInfoFile) have different values e.g. due to manual editing -->
+  <Target Name="BluehandsVersioningBuildProperties" Condition="'$(GenerateAssemblyInfo)' == 'true'" AfterTargets="BluehandsVersioning">
     <Message Text="Applying generated version information to build properties (for projects using the new MSBuild format)"/>
     <PropertyGroup>
       <AssemblyVersion>$(FullVersion)</AssemblyVersion>
