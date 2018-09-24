@@ -13,7 +13,7 @@
     <VersionTemplateFilenames Condition=" '$(VersionTemplateFilenames)' == '' ">Version.txt</VersionTemplateFilenames>
     <VersionTemplateFolders Condition=" '$(VersionTemplateFolders)' == '' ">$(ProjectDir);$(SolutionDir)</VersionTemplateFolders>
     <VersionTemplateSegmentCount Condition=" '$(VersionTemplateSegmentCount)' == '' ">3</VersionTemplateSegmentCount>
-    <AssemblyVersionInfoFile Condition=" '$(AssemblyVersionInfoFile)' == '' ">$(IntermediateOutputPath)AssemblyVersionInfo.cs</AssemblyVersionInfoFile>
+    <AssemblyVersionInfoFile Condition=" '$(AssemblyVersionInfoFile)' == '' ">$(IntermediateOutputPath)$(AssemblyName).AssemblyVersionInfo.cs</AssemblyVersionInfoFile>
     <AssemblyInformationalVersionEscapeCharacter Condition=" '$(AssemblyInformationalVersionEscapeCharacter)' == '' ">-</AssemblyInformationalVersionEscapeCharacter>
     <AssemblyInfoFile Condition=" '$(AssemblyInfoFile)' == '' ">$(ProjectDir)Properties\AssemblyInfo.cs</AssemblyInfoFile>
     <AssemblyVersionAttributePatterns Condition=" '$(AssemblyVersionAttributePatterns)' == '' ">^[^\/].*[\s.:](AssemblyVersion|AssemblyFileVersion|AssemblyInformationalVersion)([\s(]|Attribute[\s(])</AssemblyVersionAttributePatterns>
