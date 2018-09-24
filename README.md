@@ -36,6 +36,10 @@ Each build from a CI server will automatically get its own version number even i
 
 ## Changelog
 
+### Version 1.3.1
+
+- Fixed: building on a build server or after manually deleting the `obj` folder no longer causes an MSB4018 error (The "AssemblyInfo" task failed unexpectedly)
+
 ### Version 1.3
 
 - Improved: the generated `AssemblyVersionInfo.cs` is now located in the `obj` folder by default to avoid cluttering up the project folder
